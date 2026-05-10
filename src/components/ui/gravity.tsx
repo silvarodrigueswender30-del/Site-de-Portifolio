@@ -71,6 +71,7 @@ type GravityProps = {
   addTopWall?: boolean;
   autoStart?: boolean;
   className?: string;
+  style?: React.CSSProperties;
 };
 
 type PhysicsBody = {
@@ -81,7 +82,7 @@ type PhysicsBody = {
 
 type MatterBodyProps = {
   children: ReactNode;
-  matterBodyOptions?: Matter.IBodyDefinition;
+  matterBodyOptions?: Matter.IChamferableBodyDefinition;
   isDraggable?: boolean;
   bodyType?: "rectangle" | "circle" | "svg";
   sampleLength?: number;
@@ -166,11 +167,11 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
   ) => {
     const canvas = useRef<HTMLDivElement>(null);
     const engine = useRef(Engine.create());
-    const render = useRef<Render>();
-    const runner = useRef<Runner>();
+    const render = useRef<Render | undefined>(undefined);
+    const runner = useRef<Runner | undefined>(undefined);
     const bodiesMap = useRef(new Map<string, PhysicsBody>());
-    const frameId = useRef<number>();
-    const mouseConstraint = useRef<Matter.MouseConstraint>();
+    const frameId = useRef<number | undefined>(undefined);
+    const mouseConstraint = useRef<Matter.MouseConstraint | undefined>(undefined);
     const mouseDown = useRef(false);
     const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
     const isRunning = useRef(false);
@@ -272,12 +273,10 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         },
       });
 
-      const mouse = Mouse.create(render.current.canvas);
-      mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
-      mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
-      mouse.element.removeEventListener("touchstart", mouse.mousedown);
-      mouse.element.removeEventListener("touchmove", mouse.mousemove);
-      mouse.element.removeEventListener("touchend", mouse.mouseup);
+      // Pointer-events none no canvas do Matter.js para não bloquear scroll.
+      // O mouse constraint é criado no div container para manter o drag.
+      render.current.canvas.style.pointerEvents = "none";
+      const mouse = Mouse.create(canvas.current!);
       mouseConstraint.current = MouseConstraint.create(engine.current, {
         mouse,
         constraint: { stiffness: 0.2, render: { visible: debug } },

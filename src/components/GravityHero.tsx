@@ -40,7 +40,7 @@ export default function GravityHero() {
       </div>
 
       {/* Motor de física com as tags caindo */}
-      <Gravity gravity={{ x: 0, y: 0.8 }} className="w-full h-full">
+      <Gravity gravity={{ x: 0, y: 0.8 }} className="w-full h-full" style={{ touchAction: 'pan-y' }}>
         {TAGS.map((tag, i) => {
           // Distribui as tags horizontalmente de forma variada
           const xPositions = [
