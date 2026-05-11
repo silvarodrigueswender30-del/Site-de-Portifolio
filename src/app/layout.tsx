@@ -9,8 +9,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Master Data Automações — Projeto Digital",
-  description: "Estratégia digital completa para a Master Data Automações. Site Next.js, Google Ads, Meta Ads e ecossistema de vendas em 60 dias.",
+  title: "Off-Data Desenvolvimento Web",
+  description: "Projetamos Ecossistemas Digitais que Convertem Complexidade em Lucro Real",
+  icons: {
+    icon: "/simbolo.svg",
+  },
 };
 
 export default function RootLayout({
