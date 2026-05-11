@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -6,6 +7,12 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500"],
+});
+
+const janeDisplay = localFont({
+  src: "../../public/fonts/JANEDisplay.otf",
+  variable: "--font-jane",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +33,7 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-fog text-midnight-ink font-body">
+      <body className={`${janeDisplay.variable} min-h-full flex flex-col bg-fog text-midnight-ink font-body`}>
         {children}
       </body>
     </html>
