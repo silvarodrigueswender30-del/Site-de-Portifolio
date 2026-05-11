@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "Off-Data Desenvolvimento Web",
   description: "Projetamos Ecossistemas Digitais que Convertem Complexidade em Lucro Real",
   icons: {
-    icon: "/simbolo.svg",
+    icon: "/SIMBULO02.svg",
   },
 };
 
