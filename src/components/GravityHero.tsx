@@ -3,18 +3,24 @@
 import { Gravity, MatterBody } from "@/components/ui/gravity";
 
 const TAGS = [
-  "Next.js 15",
-  "Tailwind CSS",
-  "GSAP",
-  "Vercel Edge",
-  "SEO Técnico",
-  "GTM + GA4",
-  "Meta Ads",
-  "Google Ads",
-  "Automação",
-  "ROI",
-  "Telemetria",
-  "Alta Performance",
+  { label: "Next.js 15",       bg: "#f87171", color: "#fff" },
+  { label: "Tailwind CSS",     bg: "#fb923c", color: "#fff" },
+  { label: "GSAP",             bg: "#facc15", color: "#1a1a1a" },
+  { label: "Vercel Edge",      bg: "#4ade80", color: "#1a1a1a" },
+  { label: "SEO Técnico",      bg: "#34d399", color: "#1a1a1a" },
+  { label: "GTM + GA4",        bg: "#60a5fa", color: "#fff" },
+  { label: "Meta Ads",         bg: "#818cf8", color: "#fff" },
+  { label: "Google Ads",       bg: "#e879f9", color: "#fff" },
+  { label: "Automação",        bg: "#f472b6", color: "#fff" },
+  { label: "ROI",              bg: "#fb7185", color: "#fff" },
+  { label: "Telemetria",       bg: "#2dd4bf", color: "#1a1a1a" },
+  { label: "Alta Performance", bg: "#a78bfa", color: "#fff" },
+  { label: "Funil de Vendas",    bg: "#a5b4fc", color: "#1a1a1a" },
+  { label: "Off - Data",         bg: "#0f172a", color: "#38bdf8" },
+  { label: "Wender",             bg: "#0f172a", color: "#f97316" },
+  { label: "Contrate",           bg: "#f97316", color: "#fff" },
+  { label: "Off - Data Dev",     bg: "#1e3a5f", color: "#60a5fa" },
+  { label: "Contrate",           bg: "#16a34a", color: "#fff" },
 ];
 
 export default function GravityHero() {
@@ -28,12 +34,22 @@ export default function GravityHero() {
     >
       {/* Texto central fixo */}
       <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none px-6 text-center">
-        <h1
-          className="text-[clamp(3rem,10vw,7rem)] font-semibold leading-none tracking-tight text-white"
-          style={{ fontFamily: "var(--font-display, 'DM Sans', sans-serif)" }}
+        <div
+          className="relative pointer-events-none select-none"
+          style={{ height: "clamp(3rem,10vw,7rem)" }}
         >
-          Off - Data
-        </h1>
+          <img
+            src="/Off - Data.svg"
+            alt="Off - Data"
+            className="w-auto h-full"
+          />
+          <img
+            src="/Off - Data (Stroke).svg"
+            alt=""
+            className="absolute inset-0 w-auto h-full"
+            style={{ mixBlendMode: "screen", opacity: 0.85 }}
+          />
+        </div>
         <p className="mt-4 text-[16px] md:text-[18px] text-blue-200/60 max-w-xl leading-relaxed">
           Projetamos ecossistemas digitais que convertem complexidade em lucro real.
         </p>
@@ -51,7 +67,7 @@ export default function GravityHero() {
 
           return (
             <MatterBody
-              key={tag}
+              key={`${tag.label}-${i}`}
               x={xPositions[i % xPositions.length]}
               y={yStart}
               angle={Math.random() * 20 - 10}
@@ -62,16 +78,14 @@ export default function GravityHero() {
               }}
             >
               <span
-                className="inline-flex items-center px-4 py-2 rounded-full text-[12px] font-medium whitespace-nowrap select-none"
+                className="inline-flex items-center px-4 py-2 rounded-full text-[13px] font-semibold whitespace-nowrap select-none"
                 style={{
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(147,197,253,0.2)",
-                  color: "#93C5FD",
-                  backdropFilter: "blur(8px)",
+                  background: tag.bg,
+                  color: tag.color,
                   boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
                 }}
               >
-                {tag}
+                {tag.label}
               </span>
             </MatterBody>
           );
